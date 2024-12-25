@@ -1,23 +1,33 @@
 <div class="page-container">
     <h2 class="title">Онлайн-очередь</h2>
 
+    <!-- Фильтр по статусу -->
+    <div class="filter-container">
+        <label for="status-filter">Фильтр по статусу:</label>
+        <select id="status-filter" [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+            <option value="all">Все статусы</option>
+            <option value="0">Ожидайте</option>
+            <option value="1">Поднимайтесь</option>
+            <option value="2">Заселяется</option>
+            <option value="3">Заселен</option>
+        </select>
+    </div>
+
     <!-- Таблица -->
     <main class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>№</th>
-                    <th>ID</th>
-                    <th>Статус</th>
-                    <th>Время</th>
+                    <th (click)="sortData('id')">ID</th>
+                    <th (click)="sortData('status')">Статус</th>
+                    <th (click)="sortData('checkInTime')">Время</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let row of tableData; let i = index">
-                    <td>{{ i + 1 }}</td>
+                <tr *ngFor="let row of filteredData; let i = index">
                     <td>{{ row.studentId }}</td>
-                    <td>{{ row.status }}</td>
-                    <td>{{ row.checkInTime }}</td> <!-- Используем checkInTime для отображения времени -->
+                    <td>{{ getStatusText(row.status) }}</td>
+                    <td>{{ row.checkInTime }}</td>
                 </tr>
             </tbody>
         </table>

@@ -8,6 +8,8 @@ import { HomeComponent } from './app/home/home.component';
 import { EditComponent } from './app/edit/edit.component';
 import { HeaderComponent } from './app/header/header.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,10 +19,11 @@ const routes: Routes = [
   { path: '**', redirectTo: 'home' } // Редирект на домашнюю страницу
 ];
 
+
 // Единственный вызов bootstrapApplication
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(), // Подключаем HttpClient
-    provideRouter(routes), // Подключаем маршруты
+    provideRouter(routes), provideAnimationsAsync('noop'), // Подключаем маршруты
   ],
 }).catch((err) => console.error(err));
