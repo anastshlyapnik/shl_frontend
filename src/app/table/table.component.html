@@ -1,0 +1,25 @@
+<div class="page-container">
+    <h2 class="title">Онлайн-очередь</h2>
+
+    <!-- Таблица -->
+    <main class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>ID</th>
+                    <th>Статус</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of tableData; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ row.studentId }}</td>
+                    <td>{{ row.status }}</td>
+                    <td>{{ row.checkInTime }}</td> <!-- Используем checkInTime для отображения времени -->
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>

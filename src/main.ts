@@ -1,6 +1,26 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, Routes } from '@angular/router';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { TableComponent } from './app/table/table.component';
+import { LoginComponent } from './app/login/login.component';
+import { HomeComponent } from './app/home/home.component'; 
+import { EditComponent } from './app/edit/edit.component';
+import { HeaderComponent } from './app/header/header.component';
+import { provideHttpClient } from '@angular/common/http';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'table', component: TableComponent },
+  { path: 'edit', component: EditComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: 'home' } // Редирект на домашнюю страницу
+];
+
+// Единственный вызов bootstrapApplication
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideHttpClient(), // Подключаем HttpClient
+    provideRouter(routes), // Подключаем маршруты
+  ],
+}).catch((err) => console.error(err));

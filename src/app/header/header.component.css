@@ -1,0 +1,65 @@
+.header {
+    position: fixed;
+    /* Закрепляет элемент */
+    top: 0;
+    /* Привязывает к верхней границе окна */
+    left: 0;
+    /* Растягивает по всей ширине */
+    width: 100%;
+    /* Ширина на всю страницу */
+    z-index: 1000;
+    /* Устанавливает приоритет поверх других элементов */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #FF9900;
+    color: white;
+    height: 60px;
+    /* Фиксированная высота хэдера */
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Расстояние между логотипом и текстом */
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    /* Убираем лишние отступы */
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    /* Убираем стандартные отступы */
+    line-height: 1;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Пространство между пунктами меню */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+body {
+    padding-top: 1000px;
+    /* Добавляем отступ, чтобы контент не перекрывался хэдэром */
+}
