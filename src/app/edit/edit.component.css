@@ -20,6 +20,7 @@
     min-height: 60vh;
     /* Занимает всю высоту экрана */
     padding: 20px;
+    margin-top:30px;
     /* Добавляем отступы, чтобы таблица не прижималась к краям */
     box-sizing: border-box;
     /* Для учета отступов */
@@ -97,4 +98,38 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Поля ввода */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.form-group input,
+.form-group select {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-submit{
+    margin-left: 30px;
+    color:black;
+    background-color: rgb(255, 213, 136);
+}
+.btn-submit:hover{
+    transform: scale(1.15);
+    background-color: orange ;
 }

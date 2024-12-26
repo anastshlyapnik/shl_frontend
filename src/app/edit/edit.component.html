@@ -23,8 +23,8 @@
                 <td>{{ student.studentName }}</td>
                 <td>{{ student.studentPhone }}</td>
                 <td>{{ getStatusText(student.status) }}</td>
-                <td>{{ student.checkInStart }}</td>
-                <td>{{ student.checkInEnd }}</td>
+                <td>{{ formatTime(student.checkInStart) }}</td>
+                <td>{{ formatTime(student.checkInEnd) }}</td>
                 <td>{{ student.checkInTime }}</td>
                 <td>{{ student.volunteerId }}</td>
             </tr>
@@ -70,4 +70,28 @@
             </tr>
         </tbody>
     </table>
+</div>
+<!-- Форма для добавления нового студента -->
+<div class="form-group">
+    <h3>Добавить нового студента</h3>
+    <form (ngSubmit)="addStudent()">
+        <div>
+            <label for="studentName">ФИО:</label>
+            <input id="studentName" [(ngModel)]="newStudent.studentName" name="studentName" required />
+        </div>
+        <div>
+            <label for="studentPhone">Телефон:</label>
+            <input id="studentPhone" [(ngModel)]="newStudent.studentPhone" name="studentPhone" required />
+        </div>
+        <div>
+            <label for="status">Статус:</label>
+            <select id="status" [(ngModel)]="newStudent.status" name="status" required>
+                <option value="0">Ожидайте</option>
+                <option value="1">Поднимайтесь</option>
+                <option value="2">Заселяется</option>
+                <option value="3">Заселен</option>
+            </select>
+        </div>
+        <button class="btn-submit" type="submit">Добавить студента</button>
+    </form>
 </div>

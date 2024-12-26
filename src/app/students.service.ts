@@ -4,14 +4,17 @@ import { Observable } from 'rxjs';
 
 export interface Student {
   id: number;
-  fullName: string;
-  phoneNumber: string;
-  status: string;  // Пример: 'Ожидайте', 'Заселен'
-  checkInStart: string;
-  checkInEnd: string;
-  checkInTime: string;
-  volunteerId: number;
+  studentName: string;
+  studentPhone: number;
+  status: number;  // Убедитесь, что это число
+  checkInStart: string | null;
+  checkInEnd: string | null;
+  checkInTime: string | null;  // Убедитесь, что это строка или null
+  volunteerId: number|null;
 }
+
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -27,11 +30,12 @@ export class StudentsService {
     return this.http.get<Student[]>(this.apiUrl, { headers });
   }
 
-  // Добавить нового студента
   addStudent(student: Partial<Student>): Observable<Student> {
     const headers = this.getAuthHeaders();
     return this.http.post<Student>(this.apiUrl, student, { headers });
   }
+
+
 
   // Обновить данные студента
   updateStudent(id: number, updatedStudent: Partial<Student>): Observable<void> {
@@ -48,6 +52,18 @@ export class StudentsService {
   });
 }
 
+// Добавляем методы для CheckInStart и CheckInEnd
+updateCheckInStart(id: number): Observable<void> {
+  return this.http.put<void>(`${this.apiUrl}/CheckInStart/${id}`, null, {
+    headers: this.getAuthHeaders(),
+  });
+}
+
+updateCheckInEnd(id: number): Observable<void> {
+  return this.http.put<void>(`${this.apiUrl}/CheckInEnd/${id}`, null, {
+    headers: this.getAuthHeaders(),
+  });
+}
 
 
   // Удалить студента
