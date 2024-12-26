@@ -9,12 +9,13 @@ import { EditComponent } from './app/edit/edit.component';
 import { HeaderComponent } from './app/header/header.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthGuard } from './app/auth.guard';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'table', component: TableComponent },
-  { path: 'edit', component: EditComponent },
+  { path: 'edit', component: EditComponent ,canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'home' } // Редирект на домашнюю страницу
 ];

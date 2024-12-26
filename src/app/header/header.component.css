@@ -63,3 +63,7 @@ body {
     padding-top: 1000px;
     /* Добавляем отступ, чтобы контент не перекрывался хэдэром */
 }
+a{
+    text-decoration: none;
+    color:white;
+}

@@ -1,0 +1,73 @@
+<div class="centered-table">
+    <h2>Список студентов</h2>
+
+    <!-- Поле для поиска -->
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Поиск по ФИО" />
+
+    <table >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Номер телефона</th>
+                <th>Статус</th>
+                <th>Начало заселения</th>
+                <th>Окончание заселения</th>
+                <th>Время заселения</th>
+                <th>ID волонтера</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of filteredStudents">
+                <td>{{ student.studentId }}</td>
+                <td>{{ student.studentName }}</td>
+                <td>{{ student.studentPhone }}</td>
+                <td>{{ getStatusText(student.status) }}</td>
+                <td>{{ student.checkInStart }}</td>
+                <td>{{ student.checkInEnd }}</td>
+                <td>{{ student.checkInTime }}</td>
+                <td>{{ student.volunteerId }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="student-table">
+    <!-- Ваша основная таблица -->
+    <table class="status-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Статус</th>
+                <th>Ожидайте</th>
+                <th>Поднимайтесь</th>
+                <th>Заселяется</th>
+                <th>Заселен</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td>{{ student.studentId }}</td>
+                <td>{{ student.studentName }}</td>
+                <td>{{ getStatusText(student.status) }}</td>
+                <td>
+                    <input type="checkbox" [checked]="student.action1"
+                        (change)="onChangeStatus(student.studentId, 0, $event)" />
+                </td>
+                <td>
+                    <input type="checkbox" [checked]="student.action2"
+                        (change)="onChangeStatus(student.studentId, 1, $event)" />
+                </td>
+                <td>
+                    <input type="checkbox" [checked]="student.action3"
+                        (change)="onChangeStatus(student.studentId, 2, $event)" />
+                </td>
+                <td>
+                    <input type="checkbox" [checked]="student.action4"
+                        (change)="onChangeStatus(student.studentId, 3, $event)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

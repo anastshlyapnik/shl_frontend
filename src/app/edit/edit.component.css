@@ -1,0 +1,100 @@
+/* edit.component.css */
+
+/* Обертка для таблицы */
+.student-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Занимает всю высоту экрана */
+    padding: 20px;
+    /* Добавляем отступы, чтобы таблица не прижималась к краям */
+    box-sizing: border-box;
+    /* Для учета отступов */
+}
+
+.centered-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    /* Занимает всю высоту экрана */
+    padding: 20px;
+    /* Добавляем отступы, чтобы таблица не прижималась к краям */
+    box-sizing: border-box;
+    /* Для учета отступов */
+    flex-direction: column;
+    /* Центрируем содержимое по вертикали */
+}
+
+/* Стили для самой таблицы */
+table {
+    width: 80%;
+    /* Ширина таблицы (можно настроить) */
+    border-collapse: collapse;
+    /* Убирает промежутки между ячейками */
+    margin-top: 20px;
+    /* Отступ сверху */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Тень для таблицы */
+    background-color: #fff;
+    /* Белый фон */
+    border-radius: 8px;
+    /* Скругляем углы таблицы */
+}
+
+/* Стили для ячеек */
+th,
+td {
+    padding: 10px;
+    /* Отступы в ячейках */
+    text-align: center;
+    /* Выравнивание текста по центру */
+    border: 1px solid #ddd;
+    /* Светлая рамка вокруг ячеек */
+}
+
+/* Заголовки столбцов */
+th {
+    background-color: #f4f4f4;
+    /* Фон заголовков */
+    font-weight: bold;
+    /* Жирный шрифт для заголовков */
+}
+
+/* Стили для строк */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Фон четных строк */
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    /* Фон при наведении на строку */
+}
+
+/* Стили для чекбоксов */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    /* Увеличиваем размер чекбокса */
+    cursor: pointer;
+    /* Указатель при наведении */
+}
+input[type="checkbox"]:hover {
+    transform: scale(1.8);}
+
+/* Стили для кнопки и других элементов, если нужно */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

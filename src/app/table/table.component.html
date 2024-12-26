@@ -1,7 +1,6 @@
 <div class="page-container">
     <h2 class="title">Онлайн-очередь</h2>
 
-    <!-- Фильтр по статусу -->
     <div class="filter-container">
         <label for="status-filter">Фильтр по статусу:</label>
         <select id="status-filter" [(ngModel)]="selectedStatus" (change)="onStatusChange()">
@@ -13,7 +12,6 @@
         </select>
     </div>
 
-    <!-- Таблица -->
     <main class="table-container">
         <table>
             <thead>
