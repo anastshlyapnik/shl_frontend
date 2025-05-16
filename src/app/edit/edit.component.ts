@@ -6,12 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription, interval } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule,NgxMaskDirective],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
@@ -33,14 +33,18 @@ export class EditComponent implements OnInit, OnDestroy {
     3: 'Заселен',
   };
 
+  statusOptions: number[] = [0, 1, 2, 3];
+
+
   constructor(
     private studentsService: StudentsService,
     private authService: AuthService
   ) {}
 
+  //обновление страницы
   ngOnInit(): void {
     // Запуск автообновления каждые 3 секунды
-    this.refreshSubscription = interval(3000)
+    this.refreshSubscription = interval(30000)
       .pipe(
         switchMap(() => this.studentsService.getStudents()) // Делает запрос к бэкенду
       )
@@ -59,10 +63,12 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
 addStudent(): void {
+  const phoneWithPrefix = `+7${this.newStudent.studentPhone.replace(/\D/g, '')}`; // только цифры
+
   const studentData: Student = {
     id: 0,  // ID будет назначен на сервере
     studentName: this.newStudent.studentName,
-    studentPhone: parseFloat(this.newStudent.studentPhone),
+    studentPhone: phoneWithPrefix,
     status: this.newStudent.status,  // status будет числом
     checkInStart: null,  // Устанавливаем в null
     checkInEnd: null,    // Устанавливаем в null
@@ -110,52 +116,46 @@ formatTime(time: string | null): string | null {
   }
 
   
-  // Метод для изменения статуса студента по чекбоксу
-  onChangeStatus(studentId: number, actionId: number, event: Event): void {
-  const checkbox = event.target as HTMLInputElement;
-  const status = checkbox.checked ? actionId : -1;
+  // Метод для изменения статуса студента 
+  onChangeStatus(studentId: number, newStatus: number): void {
+  this.studentsService.updateStudentStatus(studentId, newStatus).subscribe({
+    next: () => {
+      console.log(`Статус студента ${studentId} обновлён`);
 
-  // Проверка studentId
-  if (!studentId) {
-    console.error('Ошибка: ID студента не определён!');
-    return;
-  }
-
-  // Обновляем статус студента
-  this.studentsService.updateStudentStatus(studentId, status).subscribe(
-    () => {
-      console.log(`Статус для студента с ID ${studentId} изменён на ${status}`);
-      const student = this.students.find((s) => s.id === studentId);
-      if (student) {
-        student.status = status; // Обновляем статус в массиве студентов
+      // Если статус == 2 (Заселяется), вызываем updateCheckInStart
+      if (newStatus === 2) {
+        this.studentsService.updateCheckInStart(studentId).subscribe({
+          next: () => console.log(`CheckInStart установлен для ${studentId}`),
+          error: (err) => console.error(`Ошибка при установке CheckInStart:`, err)
+        });
       }
 
-      // Если статус обновился на "CheckInStart", отправляем запрос на CheckInStart
-      if (actionId === 2 && checkbox.checked) {
-        this.studentsService.updateCheckInStart(studentId).subscribe(
-          () => {
-            console.log(`Студент с ID ${studentId} начал заселение.`);
-          },
-          (error) => {
-            console.error(`Ошибка при обновлении времени заселения для студента ${studentId}:`, error);
-          }
-        );
-      }
-
-      // Если статус обновился на "CheckInEnd", отправляем запрос на CheckInEnd
-      if (actionId === 3 && checkbox.checked) {
-        this.studentsService.updateCheckInEnd(studentId).subscribe(
-          () => {
-            console.log(`Студент с ID ${studentId} завершил заселение.`);
-          },
-          (error) => {
-            console.error(`Ошибка при завершении заселения для студента ${studentId}:`, error);
-          }
-        );
+      // Если статус == 3 (Заселен), вызываем updateCheckInEnd
+      if (newStatus === 3) {
+        this.studentsService.updateCheckInEnd(studentId).subscribe({
+          next: () => console.log(`CheckInEnd установлен для ${studentId}`),
+          error: (err) => console.error(`Ошибка при установке CheckInEnd:`, err)
+        });
       }
     },
-    (error) => {
+    error: (error: any) => {
       console.error(`Ошибка изменения статуса для студента ${studentId}:`, error);
+    }
+  });
+}
+
+downloadReport(): void {
+  this.studentsService.downloadReport().subscribe(
+    (blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'students_report.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    },
+    (err: any) => {
+      console.error('Ошибка при загрузке отчета:', err);
     }
   );
 }

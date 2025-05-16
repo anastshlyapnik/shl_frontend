@@ -3,5 +3,43 @@
 
 
 html, body { height: 100%; background-color: rgb(255, 241, 222);}
-body { margin: 0; font-family: 'Montserrat semibold', "Helvetica Neue", sans-serif; }
+
+
+@font-face {
+  font-family: 'MontReg';
+  src: url('assets/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontBlack';
+  src: url('assets/fonts/Montserrat-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontBold';
+  src: url('assets/fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontSemiBold';
+  src: url('assets/fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body {
+    font-family: 'MontSemiBold';
+}
+
+
+
+
 

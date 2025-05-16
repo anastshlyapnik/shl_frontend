@@ -5,15 +5,13 @@ import { Observable } from 'rxjs';
 export interface Student {
   id: number;
   studentName: string;
-  studentPhone: number;
+  studentPhone: string;
   status: number;  // Убедитесь, что это число
   checkInStart: string | null;
   checkInEnd: string | null;
   checkInTime: string | null;  // Убедитесь, что это строка или null
   volunteerId: number|null;
 }
-
-
 
 
 @Injectable({
@@ -36,7 +34,6 @@ export class StudentsService {
   }
 
 
-
   // Обновить данные студента
   updateStudent(id: number, updatedStudent: Partial<Student>): Observable<void> {
     const headers = this.getAuthHeaders();
@@ -45,12 +42,19 @@ export class StudentsService {
 
   // Обновить только статус студента
   updateStudentStatus(id: number, status: number): Observable<void> {
-  return this.http.put<void>(`${this.apiUrl}/ChangeStatus/${id}`, status, {
-    headers: new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }),
-  });
+  return this.http.put<void>(
+    `${this.apiUrl}/ChangeStatus/${id}`,
+    status, // отправляем просто число, как требует сервер
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      })
+    }
+  );
 }
+
+
 
 // Добавляем методы для CheckInStart и CheckInEnd
 updateCheckInStart(id: number): Observable<void> {
@@ -64,6 +68,18 @@ updateCheckInEnd(id: number): Observable<void> {
     headers: this.getAuthHeaders(),
   });
 }
+
+downloadReport(): Observable<Blob> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/Export`, {
+      headers,
+      responseType: 'blob'
+    });
+  }
 
 
   // Удалить студента

@@ -11,20 +11,25 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthGuard } from './app/auth.guard';
 
+// 🧩 Для форм и масок
+import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { provideNgxMask } from 'ngx-mask';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'table', component: TableComponent },
   { path: 'edit', component: EditComponent ,canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'home' } // Редирект на домашнюю страницу
+  { path: '**', redirectTo: 'home' }
 ];
 
-
-// Единственный вызов bootstrapApplication
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(), // Подключаем HttpClient
-    provideRouter(routes), provideAnimationsAsync('noop'), // Подключаем маршруты
+    provideHttpClient(),
+    provideRouter(routes),
+    provideAnimationsAsync('noop'),
+    importProvidersFrom(FormsModule),
+    provideNgxMask()
   ],
 }).catch((err) => console.error(err));

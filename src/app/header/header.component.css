@@ -18,6 +18,7 @@
     height: 60px;
     /* Фиксированная высота хэдера */
     box-sizing: border-box;
+    font-family: 'MontBold';
 }
 
 .header-left {

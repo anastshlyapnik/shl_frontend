@@ -1,5 +1,9 @@
 /* edit.component.css */
 
+body {
+    font-family: 'MontSemiBold';
+}
+
 /* Обертка для таблицы */
 .student-table {
     display: flex;
@@ -30,7 +34,7 @@
 
 /* Стили для самой таблицы */
 table {
-    width: 80%;
+    width: 95%;
     /* Ширина таблицы (можно настроить) */
     border-collapse: collapse;
     /* Убирает промежутки между ячейками */
@@ -60,6 +64,8 @@ th {
     background-color: #f4f4f4;
     /* Фон заголовков */
     font-weight: bold;
+    font-size: 20px;
+    font-family: 'MontBold'
     /* Жирный шрифт для заголовков */
 }
 
@@ -133,3 +139,13 @@ button:hover {
     transform: scale(1.15);
     background-color: orange ;
 }
+select {
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 0 auto; /* Центрирует сам select в ячейке */
+  display: block; /* Позволяет margin: auto работать */
+  border: 1px solid #ccc;
+  font-family: 'MontSemiBold';
+  text-align: center; /* Для текста */
+  text-align-last: center; /* Центрирует выбранный элемент (работает в большинстве браузеров) */
+  }
