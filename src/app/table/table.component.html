@@ -25,7 +25,7 @@
                 <tr *ngFor="let row of filteredData; let i = index">
                     <td>{{ row.studentId }}</td>
                     <td>{{ getStatusText(row.status) }}</td>
-                    <td>{{ row.checkInTime }}</td>
+                    <td>{{ formatDuration(row.checkInTime) }}</td>
                 </tr>
             </tbody>
         </table>

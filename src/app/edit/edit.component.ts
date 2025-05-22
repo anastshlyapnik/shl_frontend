@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Subscription, interval } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgxMaskDirective } from 'ngx-mask';
+import { SignalRService } from '../signalr.service';
 
 @Component({
   selector: 'app-edit',
@@ -38,24 +39,29 @@ export class EditComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentsService: StudentsService,
-    private authService: AuthService
+    private authService: AuthService, 
+    private signalRService: SignalRService
   ) {}
-
+  loadStudents(): void {
+      this.studentsService.getStudents().subscribe((data) => {
+        this.students = data;
+        this.onSearch();
+        console.log('Данные загружены:', data);
+      });
+    }
   //обновление страницы
   ngOnInit(): void {
-    // Запуск автообновления каждые 3 секунды
-    this.refreshSubscription = interval(30000)
-      .pipe(
-        switchMap(() => this.studentsService.getStudents()) // Делает запрос к бэкенду
-      )
-      .subscribe((data) => {
-        this.students = data; // Обновляет данные в таблице
-        this.filteredStudents = data; // Изначально фильтруем всех студентов
-        console.log('Данные обновлены:', data);
-      });
+    this.signalRService.startConnection();
+
+  // Подписываемся на обновления от SignalR
+  this.signalRService.updates$.subscribe(() => {
+    this.loadStudents(); // загружаем студентов при событии
+  });
+
+  this.loadStudents(); // начальная загрузка      
   }
 
-  ngOnDestroy(): void {
+   ngOnDestroy(): void {
     // Отписываемся от обновления, чтобы избежать утечек памяти
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
@@ -103,35 +109,44 @@ addStudent(): void {
   }
 
   // Метод для добавления 3 часов к времени и форматирования с проверкой на null
-formatTime(time: string | null): string | null {
-  if (time === null || time === undefined) {
+  formatTime(time: string | null): string | null {
+    if (time === null || time === undefined) {
     
     return null;
     // Если значение равно null или undefined, возвращаем null
   }
 
-  const date = new Date(time);
-  date.setHours(date.getHours() + 3); // Добавляем 3 часа
-  return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    const date = new Date(time);
+    date.setHours(date.getHours()); 
+    return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
   }
+
+  formatDuration(duration: string | null): string | null {
+    if (!duration) return null;
+    // Пример: "00:02:33.1234567" → "00:02:33"
+    return duration.split('.')[0];
+}
+
 
   
   // Метод для изменения статуса студента 
   onChangeStatus(studentId: number, newStatus: number): void {
+  console.log(`Выбран статус ${newStatus} для студента ${studentId}`);
+
   this.studentsService.updateStudentStatus(studentId, newStatus).subscribe({
     next: () => {
       console.log(`Статус студента ${studentId} обновлён`);
 
-      // Если статус == 2 (Заселяется), вызываем updateCheckInStart
-      if (newStatus === 2) {
+      if (newStatus == 2) {
+        console.log('Отправляем запрос на установку CheckInStart');
         this.studentsService.updateCheckInStart(studentId).subscribe({
           next: () => console.log(`CheckInStart установлен для ${studentId}`),
           error: (err) => console.error(`Ошибка при установке CheckInStart:`, err)
         });
       }
 
-      // Если статус == 3 (Заселен), вызываем updateCheckInEnd
-      if (newStatus === 3) {
+      if (newStatus == 3) {
+        console.log('Отправляем запрос на установку CheckInEnd');
         this.studentsService.updateCheckInEnd(studentId).subscribe({
           next: () => console.log(`CheckInEnd установлен для ${studentId}`),
           error: (err) => console.error(`Ошибка при установке CheckInEnd:`, err)
@@ -144,13 +159,14 @@ formatTime(time: string | null): string | null {
   });
 }
 
+
 downloadReport(): void {
   this.studentsService.downloadReport().subscribe(
     (blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'students_report.xlsx';
+      a.download = 'Отчет о процессе заселения студентов.xlsx';
       a.click();
       window.URL.revokeObjectURL(url);
     },
@@ -163,12 +179,17 @@ downloadReport(): void {
 
   // Поиск студентов по имени
   onSearch(): void {
-    if (this.searchQuery) {
-      this.filteredStudents = this.students.filter((student) =>
+  if (this.searchQuery) {
+    this.filteredStudents = this.students
+      .filter((student) =>
         student.studentName.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    } else {
-      this.filteredStudents = this.students; // Если запрос пустой, показываем всех
-    }
+      )
+      .sort((a, b) => a.studentId - b.studentId); // сортировка по ID
+  } else {
+    this.filteredStudents = this.students
+      .slice() // копируем массив
+      .sort((a, b) => a.studentId - b.studentId); // сортировка по ID
   }
+}
+
 }

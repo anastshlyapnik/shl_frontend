@@ -7,6 +7,7 @@
     <table>
     <thead>
       <tr>
+        <th>№</th>
         <th>ID</th>
         <th>ФИО</th>
         <th>Номер телефона</th>
@@ -17,7 +18,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of filteredStudents">
+      <tr *ngFor="let student of filteredStudents; let i = index">
+        <td>{{ i + 1 }}</td>
         <td>{{ student.studentId }}</td>
         <td>{{ student.studentName }}</td>
         <td>{{ student.studentPhone }}</td>
@@ -34,7 +36,7 @@
 
         <td>{{ formatTime(student.checkInStart) }}</td>
         <td>{{ formatTime(student.checkInEnd) }}</td>
-        <td>{{ student.checkInTime }}</td>
+        <td>{{ formatDuration(student.checkInTime) }}</td>
       </tr>
     </tbody>
   </table>

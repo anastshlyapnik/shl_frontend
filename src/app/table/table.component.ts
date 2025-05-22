@@ -3,7 +3,8 @@ import { StudentsService } from '../students.service';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms'; 
 import { RouterModule } from '@angular/router';
-import { Subscription, interval } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { SignalRService } from '../signalr.service';
 
 @Component({
   selector: 'app-table',
@@ -16,7 +17,7 @@ export class TableComponent implements OnInit, OnDestroy {
   tableData: any[] = [];
   filteredData: any[] = [];
   selectedStatus: string = 'all'; 
-  autoRefreshSubscription!: Subscription; // Для управления автообновлением
+  private signalRSubscription!: Subscription;
 
   statusMapping: { [key: number]: string } = {
     0: 'Ожидайте',
@@ -25,23 +26,29 @@ export class TableComponent implements OnInit, OnDestroy {
     3: 'Заселен',
   };
 
-  constructor(private studentsService: StudentsService) {}
+  constructor(
+    private studentsService: StudentsService, 
+    private signalRService: SignalRService
+  ) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.signalRService.startConnection();
 
-    // Настраиваем автообновление данных каждые 3 секунды
-    this.autoRefreshSubscription = interval(3000).subscribe(() => {
+    // Подписываемся на обновления от SignalR
+    this.signalRSubscription = this.signalRService.updates$.subscribe(() => {
+      console.log("SignalR: получено событие обновления студентов");
       this.fetchData();
-      console.log('Данные обновлены:');
     });
+
+    this.fetchData(); // начальная загрузка
   }
 
-  // Загружаем данные из сервиса
   fetchData(): void {
     this.studentsService.getStudents().subscribe((data) => {
-      this.tableData = data; 
-      this.onStatusChange(); // Применяем фильтрацию после обновления данных
+      // Сортируем по studentId по возрастанию
+      this.tableData = data.sort((a, b) => a.id - b.id);
+      console.log('Данные загружены и отсортированы по studentId:', this.tableData);
+      this.onStatusChange(); // применить фильтр
     });
   }
 
@@ -51,30 +58,34 @@ export class TableComponent implements OnInit, OnDestroy {
 
   onStatusChange(): void {
     if (this.selectedStatus === 'all') {
-      this.filteredData = this.tableData;
+      this.filteredData = this.tableData.slice(); // копируем массив
     } else {
       this.filteredData = this.tableData.filter(
         (student) => student.status.toString() === this.selectedStatus
       );
     }
+  
+    // Сортировка по id (по возрастанию)
+    this.filteredData.sort((a, b) => a.studentId - b.studentId);
+  }
+  
+
+  formatDuration(duration: string | null): string | null {
+    if (!duration) return null;
+    return duration.split('.')[0];
   }
 
-  // Метод для сортировки по столбцу
   sortData(column: string): void {
     this.filteredData.sort((a, b) => {
-      if (a[column] < b[column]) {
-        return -1;
-      } else if (a[column] > b[column]) {
-        return 1;
-      }
+      if (a[column] < b[column]) return -1;
+      if (a[column] > b[column]) return 1;
       return 0;
     });
   }
 
-  // Очищаем подписку на автообновление при уничтожении компонента
   ngOnDestroy(): void {
-    if (this.autoRefreshSubscription) {
-      this.autoRefreshSubscription.unsubscribe();
+    if (this.signalRSubscription) {
+      this.signalRSubscription.unsubscribe();
     }
   }
 }
