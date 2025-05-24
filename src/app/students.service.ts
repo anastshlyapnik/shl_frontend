@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Student {
-  id: number;
+  studentId: number;
   studentName: string;
   studentPhone: string;
   status: number;  // Убедитесь, что это число
@@ -20,7 +20,13 @@ export interface Student {
 export class StudentsService {
   private apiUrl = 'https://localhost:7169/api/students'; // URL API для "Students"
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+  
+  // Получить одного студента по ID
+getStudent(id: number): Observable<Student> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Student>(`${this.apiUrl}/${id}`, { headers });
+}
 
   // Получить всех студентов
   getStudents(): Observable<Student[]> {

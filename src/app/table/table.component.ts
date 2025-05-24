@@ -48,7 +48,7 @@ export class TableComponent implements OnInit, OnDestroy {
   fetchData(): void {
     this.studentsService.getStudents().subscribe((data) => {
       // Сортируем по studentId по возрастанию
-      this.tableData = data.sort((a, b) => a.id - b.id);
+      this.tableData = data.sort((a, b) => a.studentId - b.studentId);
       this.calculateEstimatedTimes();
       console.log('Данные загружены и отсортированы по studentId:', this.tableData);
       this.onStatusChange(); // применить фильтр

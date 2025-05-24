@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     /* Занимает всю высоту экрана */
     padding: 20px;
     /* Добавляем отступы, чтобы таблица не прижималась к краям */
@@ -24,7 +24,7 @@ body {
     min-height: 60vh;
     /* Занимает всю высоту экрана */
     padding: 20px;
-    margin-top:30px;
+    margin-top: 30px;
     /* Добавляем отступы, чтобы таблица не прижималась к краям */
     box-sizing: border-box;
     /* Для учета отступов */
@@ -66,7 +66,7 @@ th {
     font-weight: bold;
     font-size: 20px;
     font-family: 'MontBold'
-    /* Жирный шрифт для заголовков */
+        /* Жирный шрифт для заголовков */
 }
 
 /* Стили для строк */
@@ -87,8 +87,10 @@ input[type="checkbox"] {
     cursor: pointer;
     /* Указатель при наведении */
 }
+
 input[type="checkbox"]:hover {
-    transform: scale(1.8);}
+    transform: scale(1.8);
+}
 
 /* Стили для кнопки и других элементов, если нужно */
 button {
@@ -130,25 +132,147 @@ button:hover {
     font-size: 16px;
 }
 
-.btn-submit{
-    margin-left: 30px;
-    color:black;
+.btn-submit {
+    color: black;
     background-color: rgb(255, 204, 110);
     font-family: 'MontSemiBold';
 
 }
-.btn-submit:hover{
+
+.btn-submit:hover {
     transform: scale(1.05);
     transition: transform 0.2s;
     background-color: rgb(255, 204, 110);
 }
+
 select {
-  font-size: 16px;
-  padding: 5px 10px;
-  margin: 0 auto; /* Центрирует сам select в ячейке */
-  display: block; /* Позволяет margin: auto работать */
-  border: 1px solid #ccc;
-  font-family: 'MontSemiBold';
-  text-align: center; /* Для текста */
-  text-align-last: center; /* Центрирует выбранный элемент (работает в большинстве браузеров) */
-  }
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 0 auto;
+    /* Центрирует сам select в ячейке */
+    display: block;
+    /* Позволяет margin: auto работать */
+    border: 1px solid #ccc;
+    font-family: 'MontSemiBold';
+    text-align: center;
+    /* Для текста */
+    text-align-last: center;
+    /* Центрирует выбранный элемент (работает в большинстве браузеров) */
+}
+
+.forms-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* небольшой промежуток между формами */
+    margin-top: 30px;
+}
+
+.form-container {
+    background-color: #f2994a;
+    /* оранжевый (чуть темнее) */
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    /* фиксированная ширина для одинаковой высоты */
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+
+/* Центрируем заголовки и делаем их чуть ярче */
+.form-container h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Для каждой группы формы текст по центру */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Поля ввода шире, 90% от контейнера, для симметрии */
+.form-group input,
+.form-group select {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button.btn-submit,
+button.btn-delete {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+}
+
+/* Кнопка Добавить и Сохранить */
+button.btn-submit {
+    background-color: #fff;
+    color: #f2994a;
+}
+
+button.btn-submit:hover {
+    background-color: #f2c777;
+    color: #d2691e;
+}
+
+/* Кнопка Удалить */
+button.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+input[type="text"] {
+    font-family: 'Montserrat', 'Montserrat SemiBold', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+
+    font-size: 16px;
+    padding: 8px 12px;
+    width: 250px;
+    height: 36px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #ff9900;
+    outline: none;
+}
