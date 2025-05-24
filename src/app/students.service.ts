@@ -10,7 +10,7 @@ export interface Student {
   checkInStart: string | null;
   checkInEnd: string | null;
   checkInTime: string | null;  // Убедитесь, что это строка или null
-  volunteerId: number|null;
+  callTime?: string;
 }
 
 

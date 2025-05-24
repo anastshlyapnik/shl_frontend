@@ -1,0 +1,19 @@
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* чтобы заняло весь экран */
+}
+
+.content {
+    flex-grow: 1;
+    margin-bottom: 50px;
+    /* отступ снизу под футер */
+}
+
+.app-footer {
+    background-color: #FF9900;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

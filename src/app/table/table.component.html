@@ -18,14 +18,18 @@
                 <tr>
                     <th (click)="sortData('id')">ID</th>
                     <th (click)="sortData('status')">Статус</th>
-                    <th (click)="sortData('checkInTime')">Время</th>
+                    <th (click)="sortData('checkInTime')">Примерное время вызова</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let row of filteredData; let i = index">
+                <tr *ngFor="let row of filteredData; let i = index"
+                [ngClass]="{
+                'row-settled': row.status === 3,
+                'row-checkin': row.status === 2
+                }">
                     <td>{{ row.studentId }}</td>
                     <td>{{ getStatusText(row.status) }}</td>
-                    <td>{{ formatDuration(row.checkInTime) }}</td>
+                    <td>{{ row.callTime ? (row.callTime | date: 'HH:mm:ss') : (row.checkInStart | date: 'HH:mm:ss') }}</td>
                 </tr>
             </tbody>
         </table>

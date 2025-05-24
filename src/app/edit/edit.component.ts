@@ -78,8 +78,7 @@ addStudent(): void {
     status: this.newStudent.status,  // status будет числом
     checkInStart: null,  // Устанавливаем в null
     checkInEnd: null,    // Устанавливаем в null
-    checkInTime: null, 
-    volunteerId: null,
+    checkInTime: null,
   };
 
   this.studentsService.addStudent(studentData).subscribe(

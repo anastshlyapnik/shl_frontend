@@ -26,6 +26,8 @@ export class TableComponent implements OnInit, OnDestroy {
     3: 'Заселен',
   };
 
+  manualStartTime = new Date('2024-05-22T09:00:00'); // Можно будет менять
+
   constructor(
     private studentsService: StudentsService, 
     private signalRService: SignalRService
@@ -47,6 +49,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.studentsService.getStudents().subscribe((data) => {
       // Сортируем по studentId по возрастанию
       this.tableData = data.sort((a, b) => a.id - b.id);
+      this.calculateEstimatedTimes();
       console.log('Данные загружены и отсортированы по studentId:', this.tableData);
       this.onStatusChange(); // применить фильтр
     });
@@ -88,4 +91,49 @@ export class TableComponent implements OnInit, OnDestroy {
       this.signalRSubscription.unsubscribe();
     }
   }
+
+  calculateEstimatedTimes(): void {
+    console.log('⏳ Расчёт примерного времени вызова начат');
+  
+    const studentsWithCheckInTime = this.tableData.filter(s => s.checkInTime);
+    console.log('✅ Студенты с checkInTime:', studentsWithCheckInTime);
+  
+    const avgDurationMs =
+      studentsWithCheckInTime.length > 0
+        ? studentsWithCheckInTime
+            .map(s => this.parseDuration(s.checkInTime))
+            .reduce((acc, val) => acc + val, 0) / studentsWithCheckInTime.length
+        : 0;
+  
+    console.log('📊 Среднее время заселения (мин):', avgDurationMs/1000/60);
+  
+    const firstCheckInStart = this.tableData.find(s => s.checkInStart);
+    const startTime = firstCheckInStart
+      ? new Date(firstCheckInStart.checkInStart)
+      : this.manualStartTime;
+  
+    console.log('🕒 Стартовое время заселения:', startTime);
+  
+    let position = 0;
+  
+    this.tableData.forEach((student, index) => {
+      if (student.status === 0) {
+        position++;
+        const groupIndex = Math.floor(position / 5);
+        const estimatedTime = new Date(startTime.getTime() + groupIndex * avgDurationMs);
+        student.callTime = estimatedTime;
+        console.log(`📌 Студент ID ${student.id}: позиция ${position}, вызов в ${estimatedTime}`);
+      } else {
+        student.callTime = null;
+      }
+    });
+  }
+  
+  
+  // Парсинг строки вида HH:mm:ss
+  parseDuration(duration: string): number {
+    const [h, m, s] = duration.split(':').map(Number);
+    return ((h * 60 + m) * 60 + s) * 1000;
+  }
+  
 }

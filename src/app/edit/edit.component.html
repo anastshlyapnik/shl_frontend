@@ -61,23 +61,13 @@
                 prefix="+7("
                 [(ngModel)]="newStudent.studentPhone"
                 name="studentPhone" required
-                
             />
-
-        
         </div>
-        
-        <div>
-            <label for="status">Статус:</label>
-            <select id="status" [(ngModel)]="newStudent.status" name="status" required>
-                <option value="0">Ожидайте</option>
-                <option value="1">Поднимайтесь</option>
-                <option value="2">Заселяется</option>
-                <option value="3">Заселен</option>
-            </select>
-        </div>
-        <button class="btn-submit" type="submit">Добавить студента</button>
+          <button class="btn-submit" type="submit">Добавить студента</button>
     </form>
-    <button (click)="downloadReport()">Скачать отчёт (Excel)</button>
-
+    <div style="display: flex; justify-content: center;">
+    <button  class="btn-submit" (click)="downloadReport()">Скачать Excel-отчёт </button>
+    </div>
 </div>
+
+

@@ -133,11 +133,14 @@ button:hover {
 .btn-submit{
     margin-left: 30px;
     color:black;
-    background-color: rgb(255, 213, 136);
+    background-color: rgb(255, 204, 110);
+    font-family: 'MontSemiBold';
+
 }
 .btn-submit:hover{
-    transform: scale(1.15);
-    background-color: orange ;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+    background-color: rgb(255, 204, 110);
 }
 select {
   font-size: 16px;
