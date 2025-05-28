@@ -1,12 +1,16 @@
 .footer {
     text-align: center;
     padding: 10px 20px;
-    background-color: #ffbb5d;
+    background-color: #ff8c00;
     color: white;
     font-size: 14px;
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
+}
+
+button{
+
 }
 
 .footer p {

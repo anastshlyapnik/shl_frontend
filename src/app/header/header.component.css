@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #FF9900;
+    background-color: #ff8c00;
     color: white;
     height: 60px;
     /* Фиксированная высота хэдера */
@@ -25,7 +25,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Расстояние между логотипом и текстом */
+    transition: transform 0.7s;
+}
+
+.header-left:hover{
+    transform: scale(1.07);
 }
 
 .logo-img {
@@ -41,7 +45,9 @@
     margin: 0;
     /* Убираем стандартные отступы */
     line-height: 1;
+    text-shadow: 1px 1px 4px rgba(48, 48, 48, 0.4);
 }
+
 
 .navigation {
     display: flex;
@@ -53,11 +59,13 @@
 .nav-link {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 22px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s;
 }
 
 .nav-link:hover {
-    text-decoration: underline;
+    transform: scale(1.1);
 }
 
 body {

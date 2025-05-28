@@ -3,12 +3,13 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Md5 } from 'ts-md5';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-     private apiUrl = 'https://localhost:7169/api/auth';
+     private apiUrl = `${environment.apiUrl}/api/auth`;
   constructor(private _http: HttpClient) {}
 
   public login(info: { login: string; password: string }): Observable<number> {

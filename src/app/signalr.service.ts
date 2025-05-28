@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class SignalRService {
 
     public startConnection(): void {
         this.hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl('https://localhost:7169/studentHub', {
+            .withUrl(`${environment.apiUrl}/studentHub`, {
                 withCredentials: true // обязательно если используешь авторизацию
             })
             .withAutomaticReconnect()

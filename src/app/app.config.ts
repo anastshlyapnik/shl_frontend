@@ -9,4 +9,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync()]
 };
 
-export const SRV_URL = 'https://localhost:7169';
+export const SRV_URL = `${environment.apiUrl}`;

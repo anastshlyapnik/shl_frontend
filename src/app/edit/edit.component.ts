@@ -160,7 +160,7 @@ export class EditComponent implements OnInit, OnDestroy {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'Отчет о процессе заселения студентов.xlsx';
+        a.download = 'Отчет о процессе заселения студентов.csv';
         a.click();
         window.URL.revokeObjectURL(url);
       },

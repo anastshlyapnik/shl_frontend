@@ -40,6 +40,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  logout() {
+    // Очистка данных пользователя (например, удаление токенов)
+    localStorage.removeItem('auth_token');  // если использовался localStorage
+    sessionStorage.removeItem('auth_token');  // если использовался sessionStorage
+    
+    // Очищаем все данные, связанные с пользователем, в сервисе (если нужно)
+    this.authService.logout();  // Обязательно проверь, что метод в сервисе очищает все данные
+  
+    // Перезагрузка страницы
+    window.location.reload();
+  }
+
   /**
    * Отправка данных для авторизации
    */

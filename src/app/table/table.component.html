@@ -1,5 +1,5 @@
 <div class="page-container">
-    <h2 class="title">Онлайн-очередь</h2>
+    <h1 class="title">Онлайн-очередь</h1>
 
     <div class="filter-container">
         <label for="status-filter">Фильтр по статусу:</label>
@@ -24,10 +24,11 @@
             <tbody>
                 <tr *ngFor="let row of filteredData; let i = index"
                 [ngClass]="{
-                'row-settled': row.status === 3,
-                'row-checkin': row.status === 2
+                    'row-all': row.status != 3,
+                    'row-settled': row.status === 3
+                    
                 }">
-                    <td>{{ row.studentId }}</td>
+                    <td class>{{ row.studentId }}</td>
                     <td>{{ getStatusText(row.status) }}</td>
                     <td>{{ row.callTime ? (row.callTime | date: 'HH:mm:ss') : (row.checkInStart | date: 'HH:mm:ss') }}</td>
                 </tr>

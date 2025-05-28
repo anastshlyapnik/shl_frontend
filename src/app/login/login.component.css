@@ -27,9 +27,24 @@
     border-radius: 4px;
 }
 
-.btn {
+.btn-submit {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: transform 0.2s, background-color 0.3s ease;
+    display: block;
+    border:none;
+    text-align: center;
+    font-family: 'MontSemiBold';
+    background-color: #ffffff;
+    color: #000000;
 }
+    
+button.btn-submit:hover {
+    background-color: #ffc17e;
+    transform: scale(1.05);
+    }

@@ -93,7 +93,7 @@ input[type="checkbox"]:hover {
 }
 
 /* Стили для кнопки и других элементов, если нужно */
-button {
+button.btn-center {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -102,9 +102,10 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
+    font-family: "MontSemiBold";
 }
 
-button:hover {
+button.btn-center:hover {
     background-color: #45a049;
 }
 
@@ -132,18 +133,6 @@ button:hover {
     font-size: 16px;
 }
 
-.btn-submit {
-    color: black;
-    background-color: rgb(255, 204, 110);
-    font-family: 'MontSemiBold';
-
-}
-
-.btn-submit:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s;
-    background-color: rgb(255, 204, 110);
-}
 
 select {
     font-size: 16px;
@@ -226,7 +215,7 @@ button.btn-delete {
     margin-top: 10px;
     margin-bottom: 20px;
     width: 90%;
-    font-weight: 700;
+    font-size: 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -234,17 +223,15 @@ button.btn-delete {
     transition: background-color 0.3s ease;
     display: block;
     text-align: center;
-}
-
-/* Кнопка Добавить и Сохранить */
-button.btn-submit {
-    background-color: #fff;
-    color: #f2994a;
+    font-family: 'MontSemiBold';
+    background-color: #fff1e3;
+    color: #ff8400;
+    transition: transform 0.2s;
 }
 
 button.btn-submit:hover {
-    background-color: #f2c777;
-    color: #d2691e;
+    background-color: #ffe3c5;
+    transform: scale(1.05);
 }
 
 /* Кнопка Удалить */
@@ -254,14 +241,12 @@ button.btn-delete {
 }
 
 button.btn-delete:hover {
-    background-color: #c0392b;
+    background-color: #ff1900;
+    transform: scale(1.05);
 }
 
 input[type="text"] {
-    font-family: 'Montserrat', 'Montserrat SemiBold', sans-serif;
-    font-weight: 600;
-    font-style: normal;
-
+    font-family: 'MontSemiBold';
     font-size: 16px;
     padding: 8px 12px;
     width: 250px;
@@ -276,3 +261,9 @@ input[type="text"]:focus {
     border-color: #ff9900;
     outline: none;
 }
+
+.btn-center{
+    display: flex;
+    justify-content: center;
+}
+
