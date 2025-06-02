@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
 
   public msg: string = '';
   public isLoggedIn: boolean = false;
+ 
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.checkAuthStatus();
@@ -55,37 +57,35 @@ export class LoginComponent implements OnInit {
   /**
    * Отправка данных для авторизации
    */
- onSubmit(): void {
-  if (this.isLoggedIn) {
-    this.msg = 'Вы уже авторизованы.';
-    return;
-  }
-
-  const info = {
-    login: this.loginData.username,
-    password: this.loginData.password,
-  };
-
-  this.authService.login(info).subscribe(
-    (status) => {
-      if (status === 200) {
-        this.msg = 'Успешная авторизация!';
-        this.isLoggedIn = true;
-
-        // Используем реальный токен из ответа
-        this.authService.login(info).subscribe(response => {
-          
-        });
-      } else if (status === 401) {
-        this.msg = 'Неверный логин или пароль.';
-      } else {
-        this.msg = `Ошибка авторизации (${status}).`;
-      }
-    },
-    (error) => {
-      this.msg = 'Произошла ошибка при попытке авторизации.';
+  onSubmit(): void {
+    if (this.isLoggedIn) {
+      this.msg = 'Вы уже авторизованы.';
+      return;
     }
-  );
+
+    const info = {
+      login: this.loginData.username,
+      password: this.loginData.password,
+    };
+
+    this.authService.login(info).subscribe(
+      (status) => {
+        if (status === 200) {
+          this.msg = 'Успешная авторизация!';
+          this.isLoggedIn = true;
+          this.router.navigate(['edit']);
+        } else if (status === 401) {
+          this.msg = 'Неверный логин или пароль.';
+        } else if (status === 0) {
+          this.msg = 'Ошибка сети или сервера.';
+        } else {
+          this.msg = `Ошибка авторизации (${status}).`;
+        }
+      },
+      (error) => {
+        this.msg = 'Произошла ошибка при попытке авторизации.';
+      }
+    );
   }
 }
 

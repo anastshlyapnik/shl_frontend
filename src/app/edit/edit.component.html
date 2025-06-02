@@ -1,9 +1,6 @@
 <div class="centered-table">
   <h2>Список студентов</h2>
-
-  <!-- Поле для поиска -->
   <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Поиск по ФИО" />
-
   <table>
     <thead>
       <tr>
@@ -23,8 +20,6 @@
         <td>{{ student.studentId }}</td>
         <td>{{ student.studentName }}</td>
         <td>{{ student.studentPhone }}</td>
-
-        <!-- Выпадающий список статуса -->
         <td>
           <select [(ngModel)]="student.status" (change)="onChangeStatus(student.studentId, student.status)">
             <option [value]="0">Ожидайте</option>
@@ -33,7 +28,6 @@
             <option [value]="3">Заселен</option>
           </select>
         </td>
-
         <td>{{ formatTime(student.checkInStart) }}</td>
         <td>{{ formatTime(student.checkInEnd) }}</td>
         <td>{{ formatDuration(student.checkInTime) }}</td>
@@ -41,11 +35,7 @@
     </tbody>
   </table>
 </div>
-
-
 <div class="forms-row">
-
-  <!-- Форма 1: Добавить нового студента -->
   <div class="form-container">
     <h3>Добавить нового студента</h3>
     <form (ngSubmit)="addStudent()">
@@ -61,20 +51,14 @@
       <button class="btn-submit" type="submit">Добавить студента</button>
     </form>
   </div>
-
-<!-- Форма 2: Редактировать данные студента -->
 <div class="form-container">
   <h3>Редактировать данные студента</h3>
   <form (ngSubmit)="saveStudent()" #editForm="ngForm">
     <div class="form-group">
       <label for="editStudentId">ID студента</label>
       <input id="editStudentId" type="text" [(ngModel)]="studentIdInput" name="editStudentId" required />
-
     </div>
-
-    <!-- Новая кнопка под полем ID -->
     <button type="button" class="btn-submit" (click)="loadStudentById()">Найти</button>
-
     <div class="form-group">
       <label for="editStudentName">ФИО:</label>
       <input id="editStudentName" type="text" [(ngModel)]="editStudent.studentName" name="editStudentName" />
@@ -87,13 +71,10 @@
     <button type="submit" class="btn-submit">Сохранить</button>
   </form>
 </div>
-
-  <!-- Форма 3: Удалить студента -->
   <div class="form-container">
     <h3>Удалить студента<br>(только для администратора)</h3>
     <form (ngSubmit)="deleteStudent(deleteStudentId ? +deleteStudentId : 0)">
-      
-      <div class="form-group">
+          <div class="form-group">
         <label for="deleteStudentId">ID студента для удаления</label>
         <input id="deleteStudentId" type="text" [(ngModel)]="deleteStudentId" name="deleteStudentId" />
       </div>

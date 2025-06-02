@@ -38,7 +38,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
     // Подписываемся на обновления от SignalR
     this.signalRSubscription = this.signalRService.updates$.subscribe(() => {
-      console.log("SignalR: получено событие обновления студентов");
+      //console.log("SignalR: получено событие обновления студентов");
       this.fetchData();
     });
 
@@ -50,7 +50,7 @@ export class TableComponent implements OnInit, OnDestroy {
       // Сортируем по studentId по возрастанию
       this.tableData = data.sort((a, b) => a.studentId - b.studentId);
       this.calculateEstimatedTimes();
-      console.log('Данные загружены и отсортированы по studentId:', this.tableData);
+      //console.log('Данные загружены и отсортированы по studentId:', this.tableData);
       this.onStatusChange(); // применить фильтр
     });
   }
@@ -93,10 +93,10 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   calculateEstimatedTimes(): void {
-    console.log('⏳ Расчёт примерного времени вызова начат');
+    //console.log('Расчёт примерного времени вызова начат');
   
     const studentsWithCheckInTime = this.tableData.filter(s => s.checkInTime);
-    console.log('✅ Студенты с checkInTime:', studentsWithCheckInTime);
+    //console.log('Студенты с checkInTime:', studentsWithCheckInTime);
   
     const avgDurationMs =
       studentsWithCheckInTime.length > 0
@@ -105,14 +105,14 @@ export class TableComponent implements OnInit, OnDestroy {
             .reduce((acc, val) => acc + val, 0) / studentsWithCheckInTime.length
         : 0;
   
-    console.log('📊 Среднее время заселения (мин):', avgDurationMs/1000/60);
+    //console.log('Среднее время заселения (мин):', avgDurationMs/1000/60);
   
     const firstCheckInStart = this.tableData.find(s => s.checkInStart);
     const startTime = firstCheckInStart
       ? new Date(firstCheckInStart.checkInStart)
       : this.manualStartTime;
   
-    console.log('🕒 Стартовое время заселения:', startTime);
+    //console.log('Стартовое время заселения:', startTime);
   
     let position = 0;
   
@@ -122,7 +122,7 @@ export class TableComponent implements OnInit, OnDestroy {
         const groupIndex = Math.floor(position / 5);
         const estimatedTime = new Date(startTime.getTime() + groupIndex * avgDurationMs);
         student.callTime = estimatedTime;
-        console.log(`📌 Студент ID ${student.id}: позиция ${position}, вызов в ${estimatedTime}`);
+        //console.log(`📌 Студент ID ${student.id}: позиция ${position}, вызов в ${estimatedTime}`);
       } else {
         student.callTime = null;
       }

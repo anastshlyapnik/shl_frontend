@@ -19,13 +19,14 @@ export class EditComponent implements OnInit, OnDestroy {
   students: Student[] = [];
   filteredStudents: Student[] = [];
   searchQuery: string = '';  // Для хранения поискового запроса
-  private refreshSubscription: Subscription | null = null;
+  private signalRSubscription!: Subscription;
 
   newStudent = {
     studentName: '',
     studentPhone: '',
     status: 0
   };
+  
 
   editStudent: Partial<Student> = {};
   studentIdInput: number | null = null;
@@ -48,6 +49,23 @@ export class EditComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private signalRService: SignalRService
   ) { }
+  
+
+  ngOnInit(): void {
+    this.signalRService.startConnection();
+  
+    this.signalRSubscription = this.signalRService.updates$.subscribe(() => {
+      this.loadStudents();
+    });
+  
+    this.loadStudents(); // Оставляем
+  }
+
+  ngOnDestroy(): void {
+    if (this.signalRSubscription) {
+      this.signalRSubscription.unsubscribe();
+    }
+  }
 
   loadStudents(): void {
     this.studentsService.getStudents().subscribe((data: Student[]) => {
@@ -57,24 +75,14 @@ export class EditComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.signalRService.startConnection();
-
-    this.signalRService.updates$.subscribe(() => {
-      this.loadStudents();
-    });
-
-    this.loadStudents();
-  }
-
-  ngOnDestroy(): void {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
-  }
-
   addStudent(): void {
     const phoneWithPrefix = `+7${this.newStudent.studentPhone.replace(/\D/g, '')}`;
+    const nameRegex = /^[А-Яа-яЁё\s]+$/;
+
+  if (!nameRegex.test(this.newStudent.studentName.trim())) {
+    alert('Имя должно содержать только кириллические буквы и пробелы');
+    return;
+  }
 
     const studentData: Student = {
       studentId: 0, // Сервер назначит id
@@ -89,7 +97,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
     this.studentsService.addStudent(studentData).subscribe(
       (newStudent) => {
-        console.log('Студент добавлен:', newStudent);
+        //console.log('Студент добавлен:', newStudent);
         this.students.push(newStudent);
         this.resetForm();
       },
@@ -126,24 +134,24 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   onChangeStatus(studentId: number, newStatus: number): void {
-    console.log(`Выбран статус ${newStatus} для студента ${studentId}`);
+    //console.log(`Выбран статус ${newStatus} для студента ${studentId}`);
 
     this.studentsService.updateStudentStatus(studentId, newStatus).subscribe({
       next: () => {
-        console.log(`Статус студента ${studentId} обновлён`);
+        //console.log(`Статус студента ${studentId} обновлён`);
 
-        if (newStatus === 2) {
-          console.log('Отправляем запрос на установку CheckInStart');
+        if (newStatus == 2) {
+          //console.log('Отправляем запрос на установку CheckInStart');
           this.studentsService.updateCheckInStart(studentId).subscribe({
-            next: () => console.log(`CheckInStart установлен для ${studentId}`),
+            //next: () => console.log(`CheckInStart установлен для ${studentId}`),
             error: (err) => console.error(`Ошибка при установке CheckInStart:`, err)
           });
         }
 
-        if (newStatus === 3) {
-          console.log('Отправляем запрос на установку CheckInEnd');
+        if (newStatus == 3) {
+          //console.log('Отправляем запрос на установку CheckInEnd');
           this.studentsService.updateCheckInEnd(studentId).subscribe({
-            next: () => console.log(`CheckInEnd установлен для ${studentId}`),
+            //next: () => console.log(`CheckInEnd установлен для ${studentId}`),
             error: (err) => console.error(`Ошибка при установке CheckInEnd:`, err)
           });
         }
@@ -221,6 +229,13 @@ export class EditComponent implements OnInit, OnDestroy {
       alert('Имя и телефон не могут быть пустыми');
       return;
     }
+    const nameRegex = /^[А-Яа-яЁё\s]+$/;
+
+    if (!nameRegex.test(this.editStudent.studentName?.trim() || '')) {
+      alert('Имя должно содержать только кириллические буквы и пробелы');
+      return;
+    }
+
     if (!this.editStudent.studentId) {
       alert('ID студента отсутствует');
       return;

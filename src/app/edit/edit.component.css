@@ -3,96 +3,49 @@
 body {
     font-family: 'MontSemiBold';
 }
-
-/* Обертка для таблицы */
 .student-table {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* Занимает всю высоту экрана */
     padding: 20px;
-    /* Добавляем отступы, чтобы таблица не прижималась к краям */
     box-sizing: border-box;
-    /* Для учета отступов */
 }
-
 .centered-table {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 60vh;
-    /* Занимает всю высоту экрана */
     padding: 20px;
     margin-top: 30px;
-    /* Добавляем отступы, чтобы таблица не прижималась к краям */
     box-sizing: border-box;
-    /* Для учета отступов */
     flex-direction: column;
-    /* Центрируем содержимое по вертикали */
 }
-
-/* Стили для самой таблицы */
 table {
     width: 95%;
-    /* Ширина таблицы (можно настроить) */
     border-collapse: collapse;
-    /* Убирает промежутки между ячейками */
     margin-top: 20px;
-    /* Отступ сверху */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    /* Тень для таблицы */
     background-color: #fff;
-    /* Белый фон */
     border-radius: 8px;
-    /* Скругляем углы таблицы */
 }
-
-/* Стили для ячеек */
 th,
 td {
     padding: 10px;
-    /* Отступы в ячейках */
     text-align: center;
-    /* Выравнивание текста по центру */
     border: 1px solid #ddd;
-    /* Светлая рамка вокруг ячеек */
 }
-
-/* Заголовки столбцов */
 th {
     background-color: #f4f4f4;
-    /* Фон заголовков */
     font-weight: bold;
     font-size: 20px;
     font-family: 'MontBold'
-        /* Жирный шрифт для заголовков */
 }
-
-/* Стили для строк */
 tr:nth-child(even) {
     background-color: #f9f9f9;
-    /* Фон четных строк */
 }
-
 tr:hover {
     background-color: #f1f1f1;
-    /* Фон при наведении на строку */
 }
-
-/* Стили для чекбоксов */
-input[type="checkbox"] {
-    transform: scale(1.2);
-    /* Увеличиваем размер чекбокса */
-    cursor: pointer;
-    /* Указатель при наведении */
-}
-
-input[type="checkbox"]:hover {
-    transform: scale(1.8);
-}
-
-/* Стили для кнопки и других элементов, если нужно */
 button.btn-center {
     margin-top: 20px;
     padding: 10px 20px;
@@ -104,11 +57,9 @@ button.btn-center {
     border-radius: 5px;
     font-family: "MontSemiBold";
 }
-
 button.btn-center:hover {
     background-color: #45a049;
 }
-
 .form-group {
     display: flex;
     flex-direction: column;
@@ -116,14 +67,11 @@ button.btn-center:hover {
     margin-bottom: 15px;
     width: 100%;
 }
-
-/* Поля ввода */
 .form-group label {
     font-weight: bold;
     margin-bottom: 5px;
     text-align: center;
 }
-
 .form-group input,
 .form-group select {
     width: 80%;
@@ -132,59 +80,44 @@ button.btn-center:hover {
     border-radius: 5px;
     font-size: 16px;
 }
-
-
 select {
     font-size: 16px;
     padding: 5px 10px;
     margin: 0 auto;
-    /* Центрирует сам select в ячейке */
     display: block;
-    /* Позволяет margin: auto работать */
     border: 1px solid #ccc;
     font-family: 'MontSemiBold';
     text-align: center;
-    /* Для текста */
     text-align-last: center;
-    /* Центрирует выбранный элемент (работает в большинстве браузеров) */
 }
-
 .forms-row {
     display: flex;
     justify-content: center;
     gap: 10px;
-    /* небольшой промежуток между формами */
     margin-top: 30px;
 }
-
 .form-container {
     background-color: #f2994a;
-    /* оранжевый (чуть темнее) */
     border-radius: 10px;
     padding: 20px;
     width: 400px;
-    /* фиксированная ширина для одинаковой высоты */
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .form-container form {
     display: flex;
     flex-direction: column;
-    align-items: center; }
-
-/* Центрируем заголовки и делаем их чуть ярче */
+    align-items: center; 
+}
 .form-container h3 {
     text-align: center;
     margin-bottom: 15px;
     color: #fff;
     font-weight: 600;
 }
-
-/* Для каждой группы формы текст по центру */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -192,15 +125,12 @@ select {
     margin-bottom: 15px;
     width: 100%;
 }
-
 .form-group label {
     font-weight: bold;
     margin-bottom: 5px;
     text-align: center;
     color: #fff;
 }
-
-/* Поля ввода шире, 90% от контейнера, для симметрии */
 .form-group input,
 .form-group select {
     width: 90%;
@@ -209,7 +139,6 @@ select {
     border-radius: 5px;
     font-size: 16px;
 }
-
 button.btn-submit,
 button.btn-delete {
     margin-top: 10px;
@@ -228,23 +157,18 @@ button.btn-delete {
     color: #ff8400;
     transition: transform 0.2s;
 }
-
 button.btn-submit:hover {
     background-color: #ffe3c5;
     transform: scale(1.05);
 }
-
-/* Кнопка Удалить */
 button.btn-delete {
     background-color: #e74c3c;
     color: white;
 }
-
 button.btn-delete:hover {
     background-color: #ff1900;
     transform: scale(1.05);
 }
-
 input[type="text"] {
     font-family: 'MontSemiBold';
     font-size: 16px;
@@ -256,12 +180,10 @@ input[type="text"] {
     border-radius: 4px;
     transition: border-color 0.2s ease;
 }
-
 input[type="text"]:focus {
     border-color: #ff9900;
     outline: none;
 }
-
 .btn-center{
     display: flex;
     justify-content: center;

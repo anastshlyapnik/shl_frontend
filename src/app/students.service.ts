@@ -29,9 +29,9 @@ getStudent(id: number): Observable<Student> {
   return this.http.get<Student>(`${this.apiUrl}/${id}`, { headers });
 }
 
-  // Получить всех студентов
+
   getStudents(): Observable<Student[]> {
-    const headers = this.getAuthHeaders();  // Получаем заголовки с токеном
+    const headers = this.getAuthHeaders();  
     return this.http.get<Student[]>(this.apiUrl, { headers });
   }
 
@@ -41,7 +41,6 @@ getStudent(id: number): Observable<Student> {
   }
 
 
-  // Обновить данные студента
   updateStudent(id: number, updatedStudent: Partial<Student>): Observable<void> {
     const headers = this.getAuthHeaders();
     return this.http.put<void>(`${this.apiUrl}/${id}`, updatedStudent, { headers });

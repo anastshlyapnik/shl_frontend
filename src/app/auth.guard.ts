@@ -9,14 +9,14 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user'); // Сохраняем логин после авторизации
+    const user = localStorage.getItem('user'); 
     const allowedUsers = ['admin', 'volunteer'];
 
     if (token && allowedUsers.includes(user || '')) {
-      return true; // Разрешён доступ
+      return true; 
     } else {
-      this.router.navigate(['/login']); // Перенаправление на страницу логина
       return false;
     }
   }
 }
+

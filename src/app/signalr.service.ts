@@ -15,7 +15,7 @@ export class SignalRService {
     public startConnection(): void {
         this.hubConnection = new signalR.HubConnectionBuilder()
             .withUrl(`${environment.apiUrl}/studentHub`, {
-                withCredentials: true // обязательно если используешь авторизацию
+                withCredentials: true 
             })
             .withAutomaticReconnect()
             .build();
@@ -24,7 +24,7 @@ export class SignalRService {
             .start()
             .then(() => {
               console.log('SignalR соединение установлено');
-              this.registerOnServerEvents(); // Важно!
+              this.registerOnServerEvents(); 
             })
             .catch(err => console.error('Ошибка подключения к SignalR:', err));
         }
@@ -32,7 +32,7 @@ export class SignalRService {
         private registerOnServerEvents(): void {
           this.hubConnection.on('StudentsUpdated', () => {
             console.log('Получено событие от SignalR: StudentsUpdated');
-            this.updatesSubject.next(); // Извещаем всех подписчиков
+            this.updatesSubject.next(); 
           });
         }
   }
