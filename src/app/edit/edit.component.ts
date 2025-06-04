@@ -16,6 +16,7 @@ import { SignalRService } from '../signalr.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit, OnDestroy {
+  private updatesSubscription!: Subscription
   students: Student[] = [];
   filteredStudents: Student[] = [];
   searchQuery: string = '';  // Для хранения поискового запроса
@@ -54,7 +55,7 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.signalRService.startConnection();
   
-    this.signalRSubscription = this.signalRService.updates$.subscribe(() => {
+    this.updatesSubscription = this.signalRService.updates$.subscribe(() => {
       this.loadStudents();
     });
   
@@ -62,8 +63,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.signalRSubscription) {
-      this.signalRSubscription.unsubscribe();
+    if (this.updatesSubscription) {
+      this.updatesSubscription.unsubscribe();
     }
   }
 

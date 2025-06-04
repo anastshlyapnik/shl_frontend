@@ -4,6 +4,7 @@
     top: 0;
     /* Привязывает к верхней границе окна */
     left: 0;
+    right:0;
     /* Растягивает по всей ширине */
     width: 100%;
     /* Ширина на всю страницу */
@@ -48,6 +49,30 @@
     text-shadow: 1px 1px 4px rgba(48, 48, 48, 0.4);
 }
 
+.header-icons {
+    display: none;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-icons img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.header-icons img:hover {
+    transform: scale(1.1);
+}
+
+.desktop-only {
+    display: flex;
+}
+
+.mobile-only {
+    display: none;
+}
 
 .navigation {
     display: flex;
@@ -68,11 +93,47 @@
     transform: scale(1.1);
 }
 
-body {
-    padding-top: 1000px;
-    /* Добавляем отступ, чтобы контент не перекрывался хэдэром */
-}
 a{
     text-decoration: none;
     color:white;
+}
+
+@media (max-width: 750px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+        width: 100%;
+        padding: 8px 16px;
+    }
+
+    .header-left {
+        gap: 8px;
+    }
+
+    .logo-img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-title {
+        font-size: 18px;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: flex;
+    }
+
+    .header-icons {
+        display: flex;
+    }
 }

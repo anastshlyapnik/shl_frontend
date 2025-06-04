@@ -1,24 +1,27 @@
-<h1 class="title">Авторизация для администраторов и волонтеров</h1>
+<h1 class="title">Авторизация для организаторов</h1>
 <div class="login-container">
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
+            <div class="form-row">
             <label for="username">Логин</label>
             <input id="username" type="text" [(ngModel)]="loginData.username" name="username" class="form-control"
                 required />
         </div>
+        </div>
 
         <div class="form-group">
+            <div class="form-row">
             <label for="password">Пароль</label>
             <input id="password" type="password" [(ngModel)]="loginData.password" name="password" class="form-control"
                 required />
+        </div>
         </div>
 
         <button type="submit" class="btn-submit">Войти</button>
     </form>
 
-    <!-- Сообщение об авторизации -->
+    <button class="btn-submit logout" (click)="logout()">Выйти из аккаунта</button>
     <div *ngIf="msg" class="auth-message">{{ msg }}</div>
-    <button class="btn-submit" (click)="logout()">Выйти из аккаунта</button>
 
 </div>
 

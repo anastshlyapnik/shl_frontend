@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       this.isLoggedIn = true;
-      this.msg = 'Вы уже вошли в систему.';
+      this.msg = 'Выполнен вход в систему';
     } else {
       this.isLoggedIn = false;
-      this.msg = 'Введите логин и пароль для авторизации.';
+      this.msg = 'Введите логин и пароль для авторизации';
     }
   }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
    */
   onSubmit(): void {
     if (this.isLoggedIn) {
-      this.msg = 'Вы уже авторизованы.';
+      this.msg = 'Вы уже авторизованы';
       return;
     }
 
@@ -75,15 +75,15 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           this.router.navigate(['edit']);
         } else if (status === 401) {
-          this.msg = 'Неверный логин или пароль.';
+          this.msg = 'Неверный логин или пароль';
         } else if (status === 0) {
-          this.msg = 'Ошибка сети или сервера.';
+          this.msg = 'Ошибка сети или сервера';
         } else {
-          this.msg = `Ошибка авторизации (${status}).`;
+          this.msg = `Ошибка авторизации (${status})`;
         }
       },
       (error) => {
-        this.msg = 'Произошла ошибка при попытке авторизации.';
+        this.msg = 'Произошла ошибка при попытке авторизации';
       }
     );
   }

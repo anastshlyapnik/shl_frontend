@@ -1,17 +1,17 @@
 .login-container {
     max-width: 400px;
-    width: 100%;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(255, 153, 0, 0.1);
-    background-color: #ffbf60;
+    background-color: #ffd7ad;
 }
 
 .auth-message {
     margin-top: 15px;
     font-size: 16px;
+    text-align: center;
     color: blue;
 }
 
@@ -20,11 +20,13 @@
 }
 
 .form-control {
-    width: 100%;
+    width: 70%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-family: 'MontSemiBold';
+
 }
 
 .btn-submit {
@@ -40,11 +42,24 @@
     border:none;
     text-align: center;
     font-family: 'MontSemiBold';
-    background-color: #ffffff;
+    background-color: #ffa84a;
     color: #000000;
 }
-    
+.logout{
+    background-color: #ffffff;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
 button.btn-submit:hover {
     background-color: #ffc17e;
     transform: scale(1.05);
     }
+        @media (max-width: 750px) {
+            
+        }

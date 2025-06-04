@@ -1,87 +1,138 @@
+<div class="title"><h1>Список студентов</h1></div>
 <div class="centered-table">
-  <h2>Список студентов</h2>
-  <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Поиск по ФИО" />
-  <table>
-    <thead>
-      <tr>
-        <th>№</th>
-        <th>ID</th>
-        <th>ФИО</th>
-        <th>Номер телефона</th>
-        <th>Статус</th>
-        <th>Начало заселения</th>
-        <th>Окончание заселения</th>
-        <th>Время заселения</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let student of filteredStudents; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ student.studentId }}</td>
-        <td>{{ student.studentName }}</td>
-        <td>{{ student.studentPhone }}</td>
-        <td>
-          <select [(ngModel)]="student.status" (change)="onChangeStatus(student.studentId, student.status)">
-            <option [value]="0">Ожидайте</option>
-            <option [value]="1">Поднимайтесь</option>
-            <option [value]="2">Заселяется</option>
-            <option [value]="3">Заселен</option>
-          </select>
-        </td>
-        <td>{{ formatTime(student.checkInStart) }}</td>
-        <td>{{ formatTime(student.checkInEnd) }}</td>
-        <td>{{ formatDuration(student.checkInTime) }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="forms-row">
-  <div class="form-container">
-    <h3>Добавить нового студента</h3>
-    <form (ngSubmit)="addStudent()">
-      <div class="form-group">
-        <label for="studentName">ФИО:</label>
-        <input id="studentName" type="text" [(ngModel)]="newStudent.studentName" name="studentName" required />
-      </div>
-      <div class="form-group">
-        <label for="studentPhone">Телефон:</label>
-        <input id="studentPhone" type="text" placeholder="+7(___)___-__-__" mask="000)000-00-00" prefix="+7("
-          [(ngModel)]="newStudent.studentPhone" name="studentPhone" required />
-      </div>
-      <button class="btn-submit" type="submit">Добавить студента</button>
-    </form>
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+    placeholder="Поиск по ФИО"
+  />
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>ID</th>
+          <th>ФИО</th>
+          <th>Номер телефона</th>
+          <th>Статус</th>
+          <th>Начало заселения</th>
+          <th>Окончание заселения</th>
+          <th>Время заселения</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ student.studentId }}</td>
+          <td>{{ student.studentName }}</td>
+          <td>{{ student.studentPhone }}</td>
+          <td>
+            <select
+              [(ngModel)]="student.status"
+              (change)="onChangeStatus(student.studentId, student.status)"
+            >
+              <option [value]="0">Ожидайте</option>
+              <option [value]="1">Поднимайтесь</option>
+              <option [value]="2">Заселяется</option>
+              <option [value]="3">Заселен</option>
+            </select>
+          </td>
+          <td>{{ formatTime(student.checkInStart) }}</td>
+          <td>{{ formatTime(student.checkInEnd) }}</td>
+          <td>{{ formatDuration(student.checkInTime) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-<div class="form-container">
-  <h3>Редактировать данные студента</h3>
-  <form (ngSubmit)="saveStudent()" #editForm="ngForm">
-    <div class="form-group">
-      <label for="editStudentId">ID студента</label>
-      <input id="editStudentId" type="text" [(ngModel)]="studentIdInput" name="editStudentId" required />
+  <div class="forms-row">
+    <div class="form-container">
+      <h3>Добавить нового студента</h3>
+      <form (ngSubmit)="addStudent()">
+        <div class="form-group">
+          <label for="studentName">ФИО:</label>
+          <input
+            id="studentName"
+            type="text"
+            [(ngModel)]="newStudent.studentName"
+            name="studentName"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="studentPhone">Телефон:</label>
+          <input
+            id="studentPhone"
+            type="text"
+            placeholder="+7(___)___-__-__"
+            mask="000)000-00-00"
+            prefix="+7("
+            [(ngModel)]="newStudent.studentPhone"
+            name="studentPhone"
+            required
+          />
+        </div>
+        <button class="btn-submit" type="submit">Добавить студента</button>
+      </form>
     </div>
-    <button type="button" class="btn-submit" (click)="loadStudentById()">Найти</button>
-    <div class="form-group">
-      <label for="editStudentName">ФИО:</label>
-      <input id="editStudentName" type="text" [(ngModel)]="editStudent.studentName" name="editStudentName" />
+    <div class="form-container">
+      <h3>Редактировать данные студента</h3>
+      <form (ngSubmit)="saveStudent()" #editForm="ngForm">
+        <div class="form-group">
+          <label for="editStudentId">ID студента</label>
+          <input
+            id="editStudentId"
+            type="text"
+            [(ngModel)]="studentIdInput"
+            name="editStudentId"
+            required
+          />
+        </div>
+        <button type="button" class="btn-submit" (click)="loadStudentById()">
+          Найти
+        </button>
+        <div class="form-group">
+          <label for="editStudentName">ФИО:</label>
+          <input
+            id="editStudentName"
+            type="text"
+            [(ngModel)]="editStudent.studentName"
+            name="editStudentName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="editStudentPhone">Телефон:</label>
+          <input
+            id="editStudentPhone"
+            type="text"
+            placeholder="+7(___)___-__-__"
+            mask="+0(000)000-00-00"
+            [(ngModel)]="editStudent.studentPhone"
+            name="editStudentPhone"
+          />
+        </div>
+        <button type="submit" class="btn-submit">Сохранить</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="editStudentPhone">Телефон:</label>
-      <input id="editStudentPhone" type="text" placeholder="+7(___)___-__-__" mask="+0(000)000-00-00" 
-        [(ngModel)]="editStudent.studentPhone" name="editStudentPhone" />
+    <div class="form-container">
+      <h3>Удалить студента<br />(только для администратора)</h3>
+      <form (ngSubmit)="deleteStudent(deleteStudentId ? +deleteStudentId : 0)">
+        <div class="form-group">
+          <label for="deleteStudentId">ID студента для удаления</label>
+          <input
+            id="deleteStudentId"
+            type="text"
+            [(ngModel)]="deleteStudentId"
+            name="deleteStudentId"
+          />
+        </div>
+        <button class="btn-delete" type="submit">Удалить</button>
+      </form>
     </div>
-    <button type="submit" class="btn-submit">Сохранить</button>
-  </form>
-</div>
-  <div class="form-container">
-    <h3>Удалить студента<br>(только для администратора)</h3>
-    <form (ngSubmit)="deleteStudent(deleteStudentId ? +deleteStudentId : 0)">
-          <div class="form-group">
-        <label for="deleteStudentId">ID студента для удаления</label>
-        <input id="deleteStudentId" type="text" [(ngModel)]="deleteStudentId" name="deleteStudentId" />
-      </div>
-      <button class="btn-delete" type="submit">Удалить</button>
-    </form>
   </div>
-</div>
-<div class="btn-center">
-<button class="btn-center" (click)="downloadReport()">Скачать отчет в CSV</button>
+  <div class="btn-center">
+    <button class="btn-center" (click)="downloadReport()">
+      Скачать отчет в CSV
+    </button>
+  </div>
 </div>

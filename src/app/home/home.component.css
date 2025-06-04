@@ -1,6 +1,16 @@
+.menu {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
 .home-container {
+    font-family: "MontBold";
+    font-size: 30px;
     text-align: center;
-    padding-bottom: 400px;
+    margin: 40px 40px 0px 40px;
     background-size: auto;
 }
 .banner-wrapper {
@@ -28,7 +38,7 @@
 .banner-text p {
     font-size: 30px;
     font-weight: 400;
-    max-width: 800px;
+    max-width: 750px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 h1 {
@@ -57,33 +67,274 @@ p {
     background-repeat: no-repeat;
     /* не повторяет */
 }
-.card-row {
+
+
+.instruction{
+    padding: 40px;
+        font-family: "MontSemiBold";
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    max-width: 1100px;
+}
+
+.arrow img{
+    width: 40px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.content-box {
+    flex: 1;
+    border: 4px solid rgb(255, 186, 103);
+    background-color: #fff5e6;
+    border-radius: 24px;
+    line-height: 1.6;
+    padding: 20px;
+    color: black;
+    font-family: MontSemiBold, sans-serif;
+    font-size: 22px;
+    text-align: center;
+    box-sizing: border-box;
+    text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.2);
+}
+
+
+.bottom-wrapper {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
+    width: 100%;
+    margin-top: 50px;
 }
-.card {
-    background-color: #ffb765;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 40px 40px;
+
+.bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    max-width: 1000px; 
+    margin-left: 15px;
+    margin-right:15px;   
+}
+
+
+.bottom-img img {
+    width: 100px;
+    flex-shrink: 0;
+    margin-right:10px;
+}
+
+.bottom-content {
+    background-color: #ffce91;
+    border-radius: 16px;
+    padding: 20px;
+    color: black;
+    font-family: MontSemiBold;
     font-size: 20px;
-    height:40px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    line-height: 1.6;
+    text-align: center;
+    box-sizing: border-box;
+    flex: 1;
 }
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+
+.bottom-content ol {
+    list-style-position: inside;
+    /* Номера будут внутри блока */
+    padding-left: 0;
+    /* Убираем лишний отступ */
+    margin: 0 auto;
+    display: inline-block;
+    /* Чтобы список занимал только нужную ширину */
+    text-align: center;
 }
+ .docs{
+    width:auto;
+ }
+
+
+
 
 @keyframes slideIn {
     to {
         opacity: 1;
         transform: translateX(0); }
     }
+
+.menu-container {
+    width: 80vw;
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 170px);
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+.menu-button {
+    width: 100%;
+    font-family: "MontSemiBold";
+    font-size: 26px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ff9e28;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.menu-button.large {
+    grid-column: span 2;
+    font-size: 30px;
+}
+
+.button-text {
+    align-self: flex-end;
+    padding-bottom: 10px;
+}
+
+.button-icon {
+    width: auto;
+    height: 60%;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-icon img {
+    height: 100%;
+}
+
+.menu-button:hover {
+    background-color: #e88915; 
+}
+
+
+
+
+
+        @media (max-width: 1000px) {
+            .home-banner {
+                height: 400px;
+                margin-top: 40px;
+                padding-bottom: 5px;
+                background-image: url("/assets/images/bannerpk.png");
+                background-size: cover;
+                background-position: center;
+            }
+    
+            .banner-text {
+                top: 15%;
+                left: 5%;
+                max-width: 90%;
+            }
+    
+            .banner-text h1 {
+                font-size: 36px;
+            }
+    
+            .banner-text p {
+                font-size: 18px;
+            }
+    
+            .home-container {
+                padding: 10px 10px 0px;
+                margin:10px;
+                font-size: 18px;
+                text-align: center;
+            }
+    
+            .home-container h1 {
+                font-size: 20px;
+            }
+    
+            .home-container p {
+                font-size: 16px;
+            }
+    
+.menu-container {
+    width: 90vw;
+    grid-template-rows: repeat(2, 100px);
+    gap: 5px;
+    margin:10px;
+}
+
+.menu-button {
+    font-size: 12px;
+    padding: 7px 7px;
+    align-items: relative;
+    }
+
+.menu-button.large {
+    padding: 7px 7px;
+    font-size: 12px;
+}
+
+.button-text {
+    align-self: flex-end;
+    padding-bottom: 10px;
+}
+
+.button-icon {
+    width: auto;
+    height: 30%;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-icon img {
+    height: 100%;
+}
+.instruction{
+    padding:15px;
+    gap:10px;
+}
+.content-box{
+    font-size:12px;
+    height:auto;
+
+}
+
+.arrow img{
+    width:30px;
+}
+
+.bottom-wrapper{
+    margin:10px 0px 10px 00px;
+}
+
+.bottom-img img{
+    width:50px;
+    height:auto;
+}
+
+.bottom-content{
+    font-size: 12px;
+}
+}
+
+
 
 
         

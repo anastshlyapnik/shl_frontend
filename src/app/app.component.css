@@ -1,3 +1,11 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 241, 222);
+}
+
 .page-wrapper {
     display: flex;
     flex-direction: column;
@@ -6,8 +14,27 @@
 }
 
 .content {
+    flex:1;
     flex-grow: 1;
     margin-bottom: 50px;
     /* отступ снизу под футер */
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex-grow: 1;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 750px) {
+    .content {
+        margin-bottom: 60px;
+    }
 }
 

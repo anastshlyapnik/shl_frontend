@@ -49,11 +49,7 @@ tr.row-settled:nth-child(even) {
 }
 
 
-body {
-    margin-top: 60px;
-    
-    /* Отступ сверху, равный высоте хедера */
-}
+
 .filter-container {
     margin-bottom: 20px;
     margin-left: 50px;
@@ -72,5 +68,6 @@ tr:hover {
     background-color: #ffc281 !important;
 }
 
-
-
+@media (max-width: 750px) {
+    
+}

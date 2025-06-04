@@ -1,12 +1,29 @@
 <header class="header">
     <div class="header-left" >
         <img src="assets/images/header.svg" alt="Логотип" class="logo-img" />
-        <a routerLink="/home"><h1 class="header-title">Заселение ФАиВТ</h1></a>
+        <a routerLink="/home"><h1 class="header-title">Главная</h1></a>
     </div>
-    <nav class="navigation">
+
+    <div class="header-icons mobile-only">
+      <a routerLink="/table">
+        <img src="assets/images/header/queue.png" alt="Очередь" /> 
+        </a> 
+              <a routerLink="/edit">
+          <img src="/assets/images/header/edit.png" alt="Редактирование" />
+        </a>
+        <a routerLink="/login">
+          <img src="assets/images/header/login.png" alt="Вход" />
+        </a>
+        
+      </div>
+
+
+    <nav class="navigation dekstop-only">
         <a routerLink="/table" class="nav-link">Очередь</a>
-        <a routerLink="edit" class="nav-link">Редактирование</a>
+        <a routerLink="/edit" class="nav-link">Редактирование</a>
         <a routerLink="/login" class="nav-link">Авторизация</a>
         
     </nav>
+
+
 </header>

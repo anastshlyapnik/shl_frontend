@@ -1,26 +1,86 @@
-
   <div class="home-banner">
     <div class="banner-text">
       <h1>Добро пожаловать,<br>абитуриент!</h1>
-      <p>Приветствуем тебя на портале для заселения <br>в общежитие факультета автоматики <br>и вычислительной техники!</p>
+      <p>Приветствуем тебя на сайте для заселения <br>в общежитие факультета автоматики <br>и вычислительной техники!</p>
     </div>
   </div>
 
 
 <div class="home-container">
-  <h1>Добро пожаловать в сервис для заселения студентов </h1><h1>факультета автоматики и вычислительной техники в общежитие!</h1><br>
-  <p>Предлагаем ознакомиться с разделами:</p>
-
-  <div class="card-row">
-    <a routerLink="/table"><div class="card">Онлайн-очередь</div></a>
-    <a href="https://vk.com/aivt_gubkin"><div class="card">Группа факультета ВКонтакте</div></a>
-    <a href="https://yandex.ru/maps/?um=constructor%3A7697a83c751b307c66715c05a3312b2914e30032c3cb04a108dc2b90a4e1fe6b&source=constructorLink"><div class="card">Карта студгородка</div></a>
-  </div>
-  
-
-  <div class="card-row">
-    <a routerLink="/edit"><div class="card" >Редактирование (для волонтеров)</div></a>
-    <a routerLink="/login"><div class="card">Авторизация (для администраторов и волонтеров)</div></a>
-  </div>
-  
+  Разделы сайта
 </div>
+
+<div class="menu">
+<div class="menu-container">
+  <button class="menu-button large" routerLink="/table">
+    <span class="button-text">Онлайн-очередь</span>
+    <span class="button-icon"><img src="/assets/images/menu/queue.png" alt="Иконка"></span>
+  </button>
+  
+  <button class="menu-button" onclick="window.open('https://t.me/dorm_aivt_bot', '_blank')">
+    <span class="button-text">Telegram-бот</span>
+    <span class="button-icon"><img src="/assets/images/menu/tgbot.png" alt="Иконка"></span>
+  </button>
+  
+  
+  <button class="menu-button" onclick="window.open('https://yandex.ru/maps/?um=constructor%3A7697a83c751b307c66715c05a3312b2914e30032c3cb04a108dc2b90a4e1fe6b&source=constructorLink', '_blank')" >
+    <span class="button-text">Карта студгородка</span>
+    <span class="button-icon"><img src="/assets/images/menu/map.png" alt="Иконка"></span>
+  </button>
+  
+  <button class="menu-button" onclick="window.open('https://vk.com/aivt_gubkin', '_blank')">
+    <span class="button-text">О факультете</span>
+    <span class="button-icon"><img src="/assets/images/menu/faculty.png" alt="Иконка"></span>
+  </button>
+      <button class="menu-button" onclick="window.open('https://vk.com/aivt_gubkin', '_blank')">
+    <span class="button-text">Вопросы и ответы</span>
+    <span class="button-icon"><img src="/assets/images/menu/question.png" alt="Иконка"></span>
+  </button>
+</div>
+</div>
+
+<div class="home-container">
+  Для заселения в общежитие необходимо:
+</div>
+
+<div class="instruction">
+<div class="row">
+  <div class="arrow"><img src="/assets/images/instr/leftarrow.png" ></div>
+  <div class="content-box">Подойти к стойке регистрации по адресу <i>Центр досуга студентов, ул. Бутлерова, д.3</i> и получить регистрационный номер</div>
+</div>
+
+<div class="row">
+  <div class="content-box">Когда Вы увидите в очереди напротив своего номера статус <i>“Поднимайтесь”</i>,  Вам необходимо взять документы и пройти вместе с младшими кураторами в корпус. Вещи можете оставить внизу и вернуться за ними позже. Пройти в корпус может <i>только заселяющийся</i>, при заселении будет возможность выписать временный пропуск для родителей/родственников.</div>
+  <div class="arrow"><img src="/assets/images/instr/rightarrow.png" ></div>
+</div>
+
+<div class="row">
+  <div class="arrow"><img src="/assets/images/instr/leftarrow.png" ></div>
+  <div class="content-box">После заселения можете взять свои вещи и располагаться в комнате. Только после этого Вы можете поехать в Университет и подать документы на оформление пропуска и студенческого билета.</div>
+</div>
+</div>
+
+<div class="bottom-wrapper">
+<div class="bottom-row">
+  <div class="bottom-img"><img src="/assets/images/instr/question.png" ></div>
+  <div class="bottom-content"> В разделе <i>&#171;Вопросы и ответы&#187;</i> собраны ответы на все часто задаваемые вопросы. Также Вы можете подойти к волонтерам на стойке регистрации, младшим кураторам и представителям деканата для нужной информации. </div>
+</div>
+</div>
+
+<div class="home-container">
+  Необходимые документы
+</div>
+
+<div class="bottom-wrapper">
+  <div class="bottom-row">
+    <div class="bottom-content docs"> 
+      <ol>
+        <li>Паспорт студента</li>
+        <li>Медицинский полис студента</li>
+        <li>Медицинские справки</li>
+        <li>Сертификат прививок</li>
+        <li>Паспорт родителя (для входа в общежитие)</li>
+      </ol></div>
+  </div>
+  </div>
+

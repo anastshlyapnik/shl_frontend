@@ -6,7 +6,7 @@ html, body {
   height: 100%; 
   margin: 0;
   padding: 0; 
-  background-color: rgb(255, 241, 222);}
+  background-color: #fff1de;}
 
 
 @font-face {
@@ -40,10 +40,14 @@ html, body {
 .title {
   background-color: #ffd7ad;
   color: rgb(0, 0, 0);
-  padding-top: 65px;
+  margin-top: 60px;
   padding-bottom: 20px;
   height: 70px;
   text-align: center;
+  display:flex;
+  padding: 10px 0;
+  align-items: center;
+  justify-content: center;
 }
 
 body {
@@ -51,6 +55,13 @@ body {
 }
 
 
-
+@media (max-width: 750px) {
+  .title {
+    margin-top:48px;
+  }
+  .title,h1{
+    font-size: 24px;
+  }
+}
 
 
